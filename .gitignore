@@ -1,0 +1,7 @@
+.vscode/
+tailwindcss
+node_modules/
+bun.lockb
+tsconfig.json
+package.json
+index.ts
