@@ -1,0 +1,2 @@
+<!doctype html><html lang=\"en\" class=\"w-full h-full\"><body id=\"layout_body\" class=\"w-full h-full\">
+</body></html>
