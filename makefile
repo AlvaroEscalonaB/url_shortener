@@ -10,3 +10,15 @@ tailwind-build:
 .PHONY: templ-watch
 templ-watch:
 	templ generate --watch
+
+.PHONY: assets-watch
+assets-watch:
+	$(MAKE) tailwind-watch & $(MAKE) templ-watch
+
+.PHONY: air
+air:
+	air
+
+.PHONY: run-dev
+run-dev:
+	$(MAKE) tailwind-watch & $(MAKE) templ-watch & $(MAKE) air

@@ -5,3 +5,4 @@ bun.lockb
 tsconfig.json
 package.json
 index.ts
+tmp/
