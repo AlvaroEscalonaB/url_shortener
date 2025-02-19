@@ -10,6 +10,7 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import "url_shortener/views/components"
 import "url_shortener/views/layouts"
+import "url_shortener/views/icons"
 
 func Index() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -48,7 +49,15 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, " <body class=\"w-full h-full\"><main class=\"flex flex-col\"><div class=\"max-w-2xl w-2xl mt-12 mx-auto\"><article><h1 class=\"text-2xl text-cyan-700 font-semibold\">URL Shortener</h1></article><article class=\"mt-4\"><label class=\"d-block text-sm font-semibold\">Insert your URL</label> <input class=\"mt-1 px-3 py-1.5 w-full border border-gray-300 font-medium rounded-md text-lg placeholder:text-gray-300\" placeholder=\"https://content.com\"> <button class=\"mt-3 w-full font-semibold cursor-pointer shadow-md rounded-md py-3 text-center text-lg bg-cyan-800 text-white placeholder:bg-cyan-700\">Generate short URL</button></article></div></main></body>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, " <div class=\"w-full h-full bg-gray-100\"><main class=\"flex flex-col\"><div class=\"max-w-2xl w-2xl mt-12 mx-auto border border-cyan-800 bg-white p-10 rounded-xl\"><article><h1 class=\"text-2xl text-cyan-700 font-semibold\">URL Shortener</h1></article><article class=\"mt-4\"><label class=\"d-block text-sm font-semibold\">Insert your URL</label><form hx-post=\"short-url\" hx-target=\"#generated_url\"><input name=\"url\" class=\"w-full mt-1 px-3 py-1.5 border border-gray-300 font-medium rounded-md text-lg placeholder:text-gray-300\" placeholder=\"https://content.com\"><div class=\"flex justify-center text-cyan-700 my-3\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = icons.DownArrow("size-7").Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><section id=\"generated_url\" class=\"relative w-full px-3 py-1.5 border border-gray-300 cursor-pointer font-medium rounded-md text-lg placeholder:text-gray-300\">Generated url</section><button type=\"submit\" class=\"mt-3 w-full font-semibold cursor-pointer shadow-md rounded-md py-3 text-center text-lg bg-cyan-800 text-white placeholder:bg-cyan-700\">Generate short URL</button></form></article></div></main></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
