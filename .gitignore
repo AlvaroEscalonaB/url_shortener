@@ -6,3 +6,5 @@ tsconfig.json
 package.json
 index.ts
 tmp/
+*.txt
+*.sqlite3
