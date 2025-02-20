@@ -6,36 +6,11 @@ import (
 
 	"github.com/a-h/templ"
 
+	"url_shortener/internals/controllers"
 	"url_shortener/internals/database"
-	"url_shortener/internals/utils"
+	internal_view "url_shortener/internals/view"
 	"url_shortener/views"
-	"url_shortener/views/components"
 )
-
-func PostUrlToShorten(w http.ResponseWriter, r *http.Request) {
-	url := r.Form.Get("url")
-
-	if url != "" {
-		component := components.TransformedUrl("Cannot generate url")
-		component.Render(r.Context(), w)
-		return
-	}
-
-	fmt.Println("Form data related to url", url)
-
-	newShortUrl, err := database.Db.CreateShortUrl(url)
-	if err != nil {
-		component := components.TransformedUrl("Cannot parse and generate new url, try again.")
-		component.Render(r.Context(), w)
-		return
-	}
-
-	referer := utils.UrlReferer(w, r)
-	refererShortUrl := fmt.Sprintf("%s/short-url/%s", referer, newShortUrl.ShortUrl)
-
-	component := components.TransformedUrl(refererShortUrl)
-	component.Render(r.Context(), w)
-}
 
 func main() {
 	err := database.Db.CreateDatabase()
@@ -49,8 +24,9 @@ func main() {
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
 	mux.Handle("/", templ.Handler(views.Index()))
-	mux.HandleFunc("POST /short-url", PostUrlToShorten)
-	// http.Handle("/", )
+	mux.HandleFunc("POST /short-url", controllers.PostUrlToShorten)
+	mux.HandleFunc("GET /favicon.ico", internal_view.FaviconContent)
+	mux.HandleFunc("GET /{id}", controllers.RedirectShortUrl)
 
 	fmt.Println("Listening on :3000")
 	http.ListenAndServe(":3000", mux)
