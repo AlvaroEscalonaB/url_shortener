@@ -81,7 +81,11 @@ func (db Database) QueryShortUrl(shortUrl string) (models.UrlRecord, error) {
 		return urlRecord, content.Err()
 	}
 
-	content.Scan(urlRecord.Id, urlRecord.Url, urlRecord.ShortUrl)
+	err = content.Scan(&urlRecord.Id, &urlRecord.Url, &urlRecord.ShortUrl)
+
+	if err != nil {
+		return urlRecord, err
+	}
 
 	return urlRecord, nil
 }
