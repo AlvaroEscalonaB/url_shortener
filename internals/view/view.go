@@ -1,12 +1,7 @@
-package view
+package internal_view
 
 import (
 	"net/http"
-	"path/filepath"
 )
 
-func ServeStaticFiles(w http.ResponseWriter, r *http.Request) {
-	filePath := r.URL.Path[len("/static/"):]
-	fullPath := filepath.Join(".", "static", filePath)
-	http.ServeFile(w, r, fullPath)
-}
+func FaviconContent(w http.ResponseWriter, r *http.Request) {}
